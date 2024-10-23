@@ -1,0 +1,74 @@
+name: Build and Deploy PAC PCF
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: .
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    permissions:
+      actions: write
+    env:
+      msbuildtarget: src/TechInventoryNetworkGraph
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js version 12.x
+      - name: Setup Node.js 21.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21.x'
+      
+      # Setup NPM version
+      - name: npm 10
+        run: npm i -g npm@10 --registry=https://registry.npmjs.org
+
+      # Setup .NET
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      # Add Msbuild to PATH
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      # Install Power Platform CLI
+      - name: Install Power Platform CLI
+        run: |
+          dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+
+      # Authenticate using OAuth
+      - name: Authenticate to Power Platform with Oauth
+        run: |
+          pac auth create --environment ${{ secrets.ENVIRONMENT_URL }} --applicationId ${{ secrets.CLIENT_ID }} --clientSecret ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+
+      # Build Tailwind CSS
+      - name: Build Tailwind CSS
+        run: |
+          npm install -g tailwindcss
+          npm link tailwindcss
+          npx tailwindcss -i ./src/index.css -o ./src/generated/style.css --minify
+
+
+      # Build the PCF solution
+      - name: Build the solution
+        run: cd src/TechInventoryNetworkGraph && msbuild /restore /t:rebuild
+
+      # Push the PCF solution to our environment
+      # - name: Deploy PCF to Power Platform
+      #   run: |
+      #     pac pcf push --publisher-prefix dev --environment ${{ secrets.ENVIRONMENT_URL }}
+
+      - name: Import the solution into Power Platform
+        run: |
+          pac solution import --path ./src/TechInventoryNetworkGraph/bin/Debug/TechInventoryNetworkGraph.zip

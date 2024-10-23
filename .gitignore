@@ -7,8 +7,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # PowerApps specific build output files
-*.cdsproj.user
-**/*.cdsproj
 **/obj/
 **/bin/
 **/temp/

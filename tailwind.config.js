@@ -4,6 +4,10 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  purge: [
+    './src/**/*.html',
+    './src/**/*.js',
+  ],
   darkMode: [
     "variant",
     [
