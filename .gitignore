@@ -1,0 +1,42 @@
+# Node Modules - dependencies installed via npm
+node_modules/
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# PowerApps specific build output files
+*.cdsproj.user
+**/*.cdsproj
+**/obj/
+**/bin/
+**/temp/
+**/out/
+**/generated/
+
+# Exclude zip files
+*.zip
+
+# Dependency directories and lock files
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# Ignore environment variables/secrets file
+.env
+
+# Ignore Visual Studio files (if using Visual Studio)
+.vscode/
+.vs/
+*.user
+*.suo
+
+# Ignore local solution or package manager caches
+.sass-cache/
+.cache/
+
+# Ignore solution packager logs
+SolutionPackager.log
