@@ -17,7 +17,7 @@ const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
 
   const darkModeHandler = () => {
     setDark(!dark);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle('tg-dark');
   };
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
