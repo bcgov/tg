@@ -16,9 +16,8 @@ yarn-error.log*
 # Exclude zip files
 *.zip
 
-# Dependency directories and lock files
-package-lock.json
-yarn.lock
+*.env.*
+*.env
 
 # Logs
 *.log
