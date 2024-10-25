@@ -4,7 +4,7 @@
  * - Creates Node and Link objects without describing how they should look
  */
 
-import { Node, Link } from "../utils/NodeTypes";
+import { Node, Link } from '../utils/NodeTypes';
 
 // Function to process nodes from applications and technologies
 export const processNodesAndLinks = (
@@ -14,36 +14,36 @@ export const processNodesAndLinks = (
   applicationIntegrations: any[],
   showAppIntegrations: boolean,
   showAppEnvironments: boolean,
-  appHostingServers: any[]
+  appHostingServers: any[],
 ) => {
   const nodesMap: { [key: string]: Node } = {};
 
-  applications.forEach((app) => {
+  applications.forEach(app => {
     nodesMap[app.cr57a_appshortcode] = {
       id: app.cr57a_appshortcode,
-      type: "application",
+      type: 'application',
       productOwner: app.cr57a_productowner,
       riskLevel: app.cr57a_risklevel ? app.cr57a_risklevel % 10 : null,
     };
   });
 
-  technologies.forEach((tech) => {
+  technologies.forEach(tech => {
     nodesMap[tech.cr57a_technologyname] = {
       id: tech.cr57a_technologyname,
-      type: "technology",
+      type: 'technology',
       eolDate: tech.cr57a_eoldate ? new Date(tech.cr57a_eoldate) : null,
     };
   });
 
-  const appTechLinks: Link[] = applicationTechnologies.map((appTech) => ({
+  const appTechLinks: Link[] = applicationTechnologies.map(appTech => ({
     source:
       applications.find(
-        (app) => app.cr57a_appscatalogueid === appTech._cr57a_appshortcode_value
-      )?.cr57a_appshortcode || "",
+        app => app.cr57a_appscatalogueid === appTech._cr57a_appshortcode_value,
+      )?.cr57a_appshortcode || '',
     target:
       technologies.find(
-        (tech) => tech.cr57a_technologiesid === appTech._cr57a_technology_value
-      )?.cr57a_technologyname || "",
+        tech => tech.cr57a_technologiesid === appTech._cr57a_technology_value,
+      )?.cr57a_technologyname || '',
   }));
 
   // Handle integration links if needed
@@ -51,15 +51,15 @@ export const processNodesAndLinks = (
   const commonComponentLinks: Link[] = [];
 
   if (showAppIntegrations) {
-    applicationIntegrations.forEach((integration) => {
+    applicationIntegrations.forEach(integration => {
       const targetApp = applications.find(
-        (app) =>
-          app.cr57a_appscatalogueid === integration._cr57a_appshortcode_value
+        app =>
+          app.cr57a_appscatalogueid === integration._cr57a_appshortcode_value,
       )?.cr57a_appshortcode;
       const upstreamApp = applications.find(
-        (app) =>
+        app =>
           app.cr57a_appscatalogueid ===
-          integration._cr57a_upstreamapplication_value
+          integration._cr57a_upstreamapplication_value,
       )?.cr57a_appshortcode;
 
       if (upstreamApp && targetApp) {
@@ -69,12 +69,12 @@ export const processNodesAndLinks = (
       if (integration.cr57a_commoncomponent) {
         const commonComponentName =
           integration[
-            "cr57a_commoncomponent@OData.Community.Display.V1.FormattedValue"
+            'cr57a_commoncomponent@OData.Community.Display.V1.FormattedValue'
           ];
         if (!nodesMap[commonComponentName]) {
           nodesMap[commonComponentName] = {
             id: commonComponentName,
-            type: "common-component",
+            type: 'common-component',
           };
         }
 
@@ -92,9 +92,9 @@ export const processNodesAndLinks = (
   const appEnvironmentLinks: Link[] = [];
 
   if (showAppEnvironments) {
-    nodesMap["OpenShift"] = {
-      id: "OpenShift",
-      type: "openshift",
+    nodesMap['OpenShift'] = {
+      id: 'OpenShift',
+      type: 'openshift',
     };
 
     if (!appHostingServers || !appHostingServers.length) {
@@ -102,10 +102,10 @@ export const processNodesAndLinks = (
     }
 
     // Add new nodes for server appliances and database servers
-    appHostingServers.forEach((hostingInfo) => {
+    appHostingServers.forEach(hostingInfo => {
       const appNode = applications.find(
-        (app) =>
-          app.cr57a_appscatalogueid === hostingInfo._cr57a_appshortcode_value
+        app =>
+          app.cr57a_appscatalogueid === hostingInfo._cr57a_appshortcode_value,
       );
 
       if (!appNode) return;
@@ -114,12 +114,12 @@ export const processNodesAndLinks = (
       if (hostingInfo._cr57a_databaseserver_value) {
         const dbServerName =
           hostingInfo[
-            "_cr57a_databaseserver_value@OData.Community.Display.V1.FormattedValue"
-          ]?.split(".")[0];
+            '_cr57a_databaseserver_value@OData.Community.Display.V1.FormattedValue'
+          ]?.split('.')[0];
         if (!nodesMap[dbServerName]) {
           nodesMap[dbServerName] = {
             id: dbServerName,
-            type: "database-server",
+            type: 'database-server',
           };
         }
         // Link the app to its database server
@@ -133,12 +133,12 @@ export const processNodesAndLinks = (
       if (hostingInfo._cr57a_serverappliance_value) {
         const serverApplianceName =
           hostingInfo[
-            "_cr57a_serverappliance_value@OData.Community.Display.V1.FormattedValue"
-          ]?.split(".")[0];
+            '_cr57a_serverappliance_value@OData.Community.Display.V1.FormattedValue'
+          ]?.split('.')[0];
         if (!nodesMap[serverApplianceName]) {
           nodesMap[serverApplianceName] = {
             id: serverApplianceName,
-            type: "server-appliance",
+            type: 'server-appliance',
           };
         }
         // Link the app to its server appliance
@@ -152,7 +152,7 @@ export const processNodesAndLinks = (
       if (hostingInfo.cr57a_openshiftnamespace) {
         appEnvironmentLinks.push({
           source: appNode.cr57a_appshortcode,
-          target: "OpenShift",
+          target: 'OpenShift',
         });
       }
     });
@@ -163,6 +163,6 @@ export const processNodesAndLinks = (
     appTechLinks,
     integrationLinks,
     commonComponentLinks,
-    appEnvironmentLinks
+    appEnvironmentLinks,
   };
 };

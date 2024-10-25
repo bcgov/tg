@@ -1,4 +1,4 @@
-import { BCGovLogo } from "./BC Logo";
+import { BCGovLogo } from './BC Logo';
 
 export const LoadingScreen = () => {
   return (

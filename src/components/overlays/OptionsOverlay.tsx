@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { IoCloseSharp } from "react-icons/io5";
+import React, { useRef } from 'react';
+import { IoCloseSharp } from 'react-icons/io5';
 
 interface OptionsOverlayProps {
   onClose: () => void;
@@ -42,14 +42,14 @@ const OptionsOverlay: React.FC<OptionsOverlayProps> = ({
         <div className="flex flex-col gap-2">
           <button
             type="button"
-            onClick={(event) => onChangeView("planar", event)}
+            onClick={event => onChangeView('planar', event)}
             className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
             Planar View
           </button>
           <button
             type="button"
-            onClick={(event) => onChangeView("cluster", event)}
+            onClick={event => onChangeView('cluster', event)}
             className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
             Louvain Cluster

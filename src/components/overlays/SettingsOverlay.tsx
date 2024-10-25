@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { IoSunny, IoMoon, IoCloseSharp } from "react-icons/io5";
+import React, { useRef } from 'react';
+import { IoSunny, IoMoon, IoCloseSharp } from 'react-icons/io5';
 
 interface SettingsOverlayProps {
   onClose: () => void;
@@ -17,7 +17,7 @@ const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
 
   const darkModeHandler = () => {
     setDark(!dark);
-    document.documentElement.classList.toggle("dark");
+    document.documentElement.classList.toggle('dark');
   };
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {

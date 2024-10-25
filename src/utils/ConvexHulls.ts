@@ -3,14 +3,16 @@ import { Node } from '../utils/NodeTypes';
 
 export const drawConvexHulls = (
   g: d3.Selection<SVGGElement, unknown, null, undefined>,
-  nodes: Node[]
+  nodes: Node[],
 ) => {
   const clusters = d3.group(nodes, d => d.cluster);
 
   const hullData: [number, number][][] = [];
 
-  clusters.forEach((nodes) => {
-    const points = nodes.map(node => [node.x!, node.y!] as [number, number]);
+  clusters.forEach(nodeGroup => {
+    const points = nodeGroup.map(
+      node => [node.x!, node.y!] as [number, number],
+    );
     const hull = d3.polygonHull(points);
     if (hull) {
       hullData.push(hull);
@@ -18,10 +20,10 @@ export const drawConvexHulls = (
   });
 
   // Draw hulls behind nodes
-  const hulls = g.selectAll('.hull')
-    .data(hullData);
+  const hulls = g.selectAll('.hull').data(hullData);
 
-  hulls.enter()
+  hulls
+    .enter()
     .append('path')
     .attr('class', 'hull')
     .merge(hulls as any)

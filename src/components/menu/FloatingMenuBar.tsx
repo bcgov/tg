@@ -1,5 +1,5 @@
-import React from "react";
-import { ViewMode } from "../../utils/const";
+import React from 'react';
+import { ViewMode } from '../../utils/const';
 
 interface FloatingMenuProps {
   activeViewMode: ViewMode;
@@ -11,9 +11,9 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
   onToggleViewMode,
 }) => {
   const viewModes = [
-    { mode: ViewMode.Default, label: "Default" },
-    { mode: ViewMode.Integrations, label: "Integrations" },
-    { mode: ViewMode.Environments, label: "Environments" },
+    { mode: ViewMode.Default, label: 'Default' },
+    { mode: ViewMode.Integrations, label: 'Integrations' },
+    { mode: ViewMode.Environments, label: 'Environments' },
   ];
 
   return (
@@ -25,12 +25,9 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
           className={`flex-1 text-sm text-label2-light dark:text-label2-dark font-medium py-1 px-3 rounded-full transition-all duration-200 ease-in-out
           ${activeViewMode === view.mode ? 'bg-gray-200 dark:bg-gray-700' : ''}
           focus:outline-none hover:bg-background-light dark:hover:bg-stroke-dark`}
-          onClick={(event) => onToggleViewMode(view.mode, event)}
+          onClick={event => onToggleViewMode(view.mode, event)}
         >
-          <span
-          >
-            {view.label}
-          </span>
+          <span>{view.label}</span>
         </button>
       ))}
     </div>

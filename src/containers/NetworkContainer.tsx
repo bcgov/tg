@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import NetworkGraph from "../components/network-graph/NetworkGraph";
-import OptionsOverlay from "../components/overlays/OptionsOverlay";
-import SettingsOverlay from "../components/overlays/SettingsOverlay";
-import "./NetworkContainer.css";
-import LegendOverlay from "../components/overlays/LegendOverlay";
-import FloatingMenu from "../components/menu/FloatingMenuBar";
-import { ViewMode } from "../utils/const";
-import * as io5 from "react-icons/io5";
-import { IInputs } from "../generated/ManifestTypes";
+import React, { useEffect, useState } from 'react';
+import NetworkGraph from '../components/network-graph/NetworkGraph';
+import OptionsOverlay from '../components/overlays/OptionsOverlay';
+import SettingsOverlay from '../components/overlays/SettingsOverlay';
+import './NetworkContainer.css';
+import LegendOverlay from '../components/overlays/LegendOverlay';
+import FloatingMenu from '../components/menu/FloatingMenuBar';
+import { ViewMode } from '../utils/const';
+import * as io5 from 'react-icons/io5';
+import { IInputs } from '../generated/ManifestTypes';
 
 interface GraphContainerProps {
   context: ComponentFramework.Context<IInputs>;
@@ -17,7 +17,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [optionsVisible, setOptionsVisible] = useState(false);
   const [view, setView] = useState(ViewMode.Default); // Default view mode
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState(searchQuery);
   const [degree, setDegree] = useState(2);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState(false);

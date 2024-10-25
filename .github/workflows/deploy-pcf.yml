@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '21.x'
-      
+
       # Setup NPM version
       - name: npm 10
         run: npm i -g npm@10 --registry=https://registry.npmjs.org
@@ -58,7 +58,6 @@ jobs:
           npm install -g tailwindcss
           npm link tailwindcss
           npx tailwindcss -i ./src/index.css -o ./src/generated/style.css --minify
-
 
       # Build the PCF solution
       - name: Build the solution

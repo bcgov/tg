@@ -1,6 +1,6 @@
-import React from "react";
-import { createPortal } from "react-dom";
-import { IoInformationCircleSharp } from "react-icons/io5";
+import React from 'react';
+import { createPortal } from 'react-dom';
+import { IoInformationCircleSharp } from 'react-icons/io5';
 
 interface Node {
   id: string;
@@ -66,18 +66,18 @@ Actions: Passed`,
           <p className="text-gray-700 dark:text-gray-300">
             <strong>Type:</strong> {node.type}
           </p>
-          {node.type === "technology" ? (
+          {node.type === 'technology' ? (
             <p className="text-gray-700 dark:text-gray-300">
-              <strong>EOL Date:</strong>{" "}
-              {node.eolDate ? node.eolDate.toDateString() : "N/A"}
+              <strong>EOL Date:</strong>{' '}
+              {node.eolDate ? node.eolDate.toDateString() : 'N/A'}
             </p>
           ) : (
             <>
               <p className="text-gray-700 dark:text-gray-300">
-                <strong>Product Owner:</strong> {node.productOwner || "N/A"}
+                <strong>Product Owner:</strong> {node.productOwner || 'N/A'}
               </p>
               <p className="text-gray-700 dark:text-gray-300">
-                <strong>Risk Level:</strong> {node.riskLevel || "N/A"}
+                <strong>Risk Level:</strong> {node.riskLevel || 'N/A'}
               </p>
             </>
           )}
@@ -120,7 +120,7 @@ Actions: Passed`,
         )}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };
 

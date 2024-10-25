@@ -1,170 +1,167 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 module.exports = {
-  mode: "jit",
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
-  purge: [
-    './src/**/*.html',
-    './src/**/*.js',
-  ],
+  mode: 'jit',
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  purge: ['./src/**/*.html', './src/**/*.js'],
   darkMode: [
-    "variant",
+    'variant',
     [
-      "@media (prefers-color-scheme: dark) { &:not(.light *) }",
-      "&:is(.dark *)",
+      '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+      '&:is(.dark *)',
     ],
   ],
   theme: {
     fontSize: {
       xs: [
-        "0.75rem",
+        '0.75rem',
         {
-          lineHeight: "1rem",
+          lineHeight: '1rem',
         },
       ],
       sm: [
-        "0.875rem",
+        '0.875rem',
         {
-          lineHeight: "1.5rem",
+          lineHeight: '1.5rem',
         },
       ],
       base: [
-        "1rem",
+        '1rem',
         {
-          lineHeight: "1.75rem",
+          lineHeight: '1.75rem',
         },
       ],
       lg: [
-        "1.125rem",
+        '1.125rem',
         {
-          lineHeight: "2rem",
+          lineHeight: '2rem',
         },
       ],
       xl: [
-        "1.25rem",
+        '1.25rem',
         {
-          lineHeight: "2rem",
+          lineHeight: '2rem',
         },
       ],
-      "2xl": [
-        "1.5rem",
+      '2xl': [
+        '1.5rem',
         {
-          lineHeight: "2rem",
+          lineHeight: '2rem',
         },
       ],
-      "3xl": [
-        "2rem",
+      '3xl': [
+        '2rem',
         {
-          lineHeight: "2.5rem",
+          lineHeight: '2.5rem',
         },
       ],
-      "4xl": [
-        "2.5rem",
+      '4xl': [
+        '2.5rem',
         {
-          lineHeight: "3.5rem",
+          lineHeight: '3.5rem',
         },
       ],
-      "5xl": [
-        "3rem",
+      '5xl': [
+        '3rem',
         {
-          lineHeight: "3.5rem",
+          lineHeight: '3.5rem',
         },
       ],
-      "6xl": [
-        "3.75rem",
+      '6xl': [
+        '3.75rem',
         {
-          lineHeight: "1",
+          lineHeight: '1',
         },
       ],
-      "7xl": [
-        "4.5rem",
+      '7xl': [
+        '4.5rem',
         {
-          lineHeight: "1.1",
+          lineHeight: '1.1',
         },
       ],
-      "8xl": [
-        "6rem",
+      '8xl': [
+        '6rem',
         {
-          lineHeight: "1",
+          lineHeight: '1',
         },
       ],
-      "9xl": [
-        "8rem",
+      '9xl': [
+        '8rem',
         {
-          lineHeight: "1",
+          lineHeight: '1',
         },
       ],
     },
     extend: {
       boxShadow: {
-        thick: "0px 7px 32px rgb(0 0 0 / 35%);",
+        thick: '0px 7px 32px rgb(0 0 0 / 35%);',
       },
       colors: {
         background: {
-          light: "#F1F3F4",
-          dark: "#0D0F11",
+          light: '#F1F3F4',
+          dark: '#0D0F11',
         },
         unit: {
-          light: "#FFFFFF",
-          dark: "#191D23",
+          light: '#FFFFFF',
+          dark: '#191D23',
         },
         stroke: {
-          light: "#DCDCDD",
-          dark: "#576776",
+          light: '#DCDCDD',
+          dark: '#576776',
         },
         label: {
-          light: "#2B2E48",
-          dark: "#E3E3E3",
+          light: '#2B2E48',
+          dark: '#E3E3E3',
         },
         label2: {
-          light: "#7D7D7D",
-          dark: "#B8C0CC",
+          light: '#7D7D7D',
+          dark: '#B8C0CC',
         },
         link: {
-          light: "#7D7D7D",
-          dark: "#B8C0CC",
+          light: '#7D7D7D',
+          dark: '#B8C0CC',
         },
         node: {
           app: {
-            light: "#5DAAEE",
-            dark: "#5395CF",
+            light: '#5DAAEE',
+            dark: '#5395CF',
             peol: {
-              light: "#F9837C",
-              dark: "#F9837C",
+              light: '#F9837C',
+              dark: '#F9837C',
             },
             neol: {
-              light: "#FFC565",
-              dark: "#EFB047",
-            }
+              light: '#FFC565',
+              dark: '#EFB047',
+            },
           },
           tech: {
-            light: "#50C099",
-            dark: "#47A785",
+            light: '#50C099',
+            dark: '#47A785',
           },
           db: {
-            light: "#34495e",
-            dark: "#34495e",
+            light: '#34495e',
+            dark: '#34495e',
           },
           server: {
-            light: "#9b59b6",
-            dark: "#9b59b6",
+            light: '#9b59b6',
+            dark: '#9b59b6',
           },
         },
       },
       borderRadius: {
-        "small": "8px",
-        "5xl": "3rem",
-        "6xl": "5rem",
+        small: '8px',
+        '5xl': '3rem',
+        '6xl': '5rem',
       },
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
         stock: [defaultTheme.fontFamily.sans],
       },
     },
   },
   plugins: [
-    require("@tailwindcss/typography"),
+    require('@tailwindcss/typography'),
     // ...
   ],
 };

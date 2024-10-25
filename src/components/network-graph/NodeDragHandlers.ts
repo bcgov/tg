@@ -1,8 +1,10 @@
 // NodeDragHandlers.ts
-import * as d3 from "d3";
-import { Node } from "../../utils/NodeTypes";
+import * as d3 from 'd3';
+import { Node } from '../../utils/NodeTypes';
 
-export const handleDragStarted = (simulation: d3.Simulation<Node, undefined>) => {
+export const handleDragStarted = (
+  simulation: d3.Simulation<Node, undefined>,
+) => {
   return (event: d3.D3DragEvent<SVGCircleElement, Node, Node>, d: Node) => {
     if (!event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;

@@ -2,7 +2,10 @@
 import React, { useState } from 'react';
 import './Modal.css';
 
-const SearchOverlay: React.FC<{ onClose: () => void, onSearch: (query: string) => void }> = ({ onClose, onSearch }) => {
+const SearchOverlay: React.FC<{
+  onClose: () => void;
+  onSearch: (query: string) => void;
+}> = ({ onClose, onSearch }) => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +16,9 @@ const SearchOverlay: React.FC<{ onClose: () => void, onSearch: (query: string) =
 
   return (
     <div className="absolute left-0 top-0">
-      <button type="button" onClick={onClose}>Close</button>
+      <button type="button" onClick={onClose}>
+        Close
+      </button>
       <h2>Search</h2>
       <input
         type="text"
