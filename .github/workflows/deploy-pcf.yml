@@ -64,9 +64,9 @@ jobs:
         run: cd src/TechInventoryNetworkGraph && msbuild /restore /t:rebuild
 
       # Push the PCF solution to our environment
-      # - name: Deploy PCF to Power Platform
-      #   run: |
-      #     pac pcf push --publisher-prefix dev --environment ${{ secrets.ENVIRONMENT_URL }}
+      - name: Deploy PCF to Power Platform
+        run: |
+          pac pcf push --publisher-prefix dev --environment ${{ secrets.ENVIRONMENT_URL }}
 
       - name: Import the solution into Power Platform
         run: |

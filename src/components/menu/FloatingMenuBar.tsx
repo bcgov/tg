@@ -11,7 +11,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({
   onToggleViewMode,
 }) => {
   const viewModes = [
-    { mode: ViewMode.Default, label: 'Default' },
+    { mode: ViewMode.Default, label: 'Technologies' },
     { mode: ViewMode.Integrations, label: 'Integrations' },
     { mode: ViewMode.Environments, label: 'Environments' },
   ];
