@@ -15,7 +15,7 @@ const SearchOverlay: React.FC<{
   };
 
   return (
-    <div className="absolute left-0 top-0">
+    <div className="tg-absolute tg-left-0 tg-top-0">
       <button type="button" onClick={onClose}>
         Close
       </button>

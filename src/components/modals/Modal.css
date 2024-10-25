@@ -1,4 +1,5 @@
-.modal-overlay {
+
+.tg-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +11,7 @@
   align-items: center;
 }
 
-.modal-content {
+.tg-modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -20,7 +21,7 @@
   position: relative;
 }
 
-.modal-close-btn {
+.tg-modal-close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -30,7 +31,7 @@
   cursor: pointer;
 }
 
-.modal-section {
+.tg-modal-section {
   margin-bottom: 20px;
 }
 
@@ -39,7 +40,7 @@ p {
   color: #666;
 }
 
-.section-logo {
+.tg-section-logo {
   width: 30px;
   height: 30px;
   vertical-align: middle;

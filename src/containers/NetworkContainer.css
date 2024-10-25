@@ -1,5 +1,5 @@
 /* src/components/Modal.css */
-.modal-overlay {
+.tg-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   z-index: 1002; /* Ensure it appears above other elements */
 }
 
-.modal-content {
+.tg-modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 4px;
@@ -21,7 +21,7 @@
   position: relative;
 }
 
-.modal-content button {
+.tg-modal-content button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -31,24 +31,24 @@
   cursor: pointer;
 }
 
-.search-bar {
+.tg-search-bar {
   padding: 15px;
   border-radius: 8px;
 }
 
-.search-bar input {
+.tg-search-bar input {
   width: 200px; /* Reduced width */
   padding: 8px; /* Adjusted padding */
 }
 
-.degree-label {
+.tg-degree-label {
   display: flex;
   align-items: center;
   font-size: 14px;
   color: #ffffff;
 }
 
-.slider {
+.tg-slider {
   margin-left: 10px;
   margin-right: 10px;
   width: 200px; /* Aligned with the search bar */

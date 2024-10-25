@@ -129,7 +129,7 @@ const NetworkGraph: React.FC<{
     // Add links, nodes, and node labels to the graph
     const link = g
       .append('g')
-      .attr('class', 'links')
+      .attr('class', 'tg-links')
       .selectAll('line')
       .data(links)
       .enter()
@@ -137,7 +137,7 @@ const NetworkGraph: React.FC<{
 
     const directedLink = g
       .append('g')
-      .attr('class', 'directed-links')
+      .attr('class', 'tg-directed-links')
       .selectAll('line')
       .data(integrationLinks)
       .enter()
@@ -145,21 +145,21 @@ const NetworkGraph: React.FC<{
 
     const node = g
       .append('g')
-      .attr('class', 'nodes')
+      .attr('class', 'tg-nodes')
       .selectAll('g')
       .data(nodes)
       .enter()
       .append('g')
-      .attr('class', 'node-group');
+      .attr('class', 'tg-node-group');
 
     const labels = g
       .append('g')
-      .attr('class', 'labels')
+      .attr('class', 'tg-labels')
       .selectAll('text')
       .data(nodes)
       .enter()
       .append('text')
-      .attr('class', 'fill-label-light dark:fill-label-dark')
+      .attr('class', 'tg-fill-label-light dark:tg-fill-label-dark')
       .attr('dy', -3)
       .text(d => d.id);
 

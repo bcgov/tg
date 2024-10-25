@@ -18,18 +18,18 @@ export const applyNodeStyles = (
     .filter(d => d.type === 'technology')
     .append('rect')
     .attr('class', 'node-rect')
-    .attr('class', 'fill-node-tech-light dark:fill-node-tech-dark')
+    .attr('class', 'tg-fill-node-tech-light dark:tg-fill-node-tech-dark')
     .attr('width', 20)
     .attr('height', 20)
     .attr('x', -10)
     .attr('y', -10)
     .attr('class', d => {
       if (d.eolDate && d.eolDate < DATETIME.TODAY) {
-        return 'fill-node-app-peol-light dark:fill-node-app-peol-dark'; // Past d.eolDate
+        return 'tg-fill-node-app-peol-light dark:tg-fill-node-app-peol-dark'; // Past d.eolDate
       } else if (d.eolDate && d.eolDate >= DATETIME.TODAY && d.eolDate <= DATETIME.EOL_NEAR) {
-        return 'fill-node-app-neol-dark'; // Nearing eolDate
+        return 'tg-fill-node-app-neol-dark'; // Nearing eolDate
       } else {
-        return 'fill-node-tech-light dark:fill-node-tech-dark'; // Default color
+        return 'tg-fill-node-tech-light dark:tg-fill-node-tech-dark'; // Default color
       }
     });
 
@@ -38,7 +38,7 @@ export const applyNodeStyles = (
     .filter(d => d.type !== 'technology')
     .append('circle')
     .attr('class', 'node-circle')
-    .attr('class', 'fill-node-app-light dark:fill-node-app-dark')
+    .attr('class', 'tg-fill-node-app-light dark:tg-fill-node-app-dark')
     .attr('r', 10);
 
   // Custom appearance for specific node types
@@ -56,7 +56,7 @@ export const applyNodeStyles = (
     .filter(d => d.type === 'database-server')
     .append('rect')
     .attr('class', 'node-rect')
-    .attr('class', 'fill-node-db-light dark:fill-node-db-dark')
+    .attr('class', 'tg-fill-node-db-light dark:tg-fill-node-db-dark')
     .attr('width', 20)
     .attr('height', 20)
     .attr('x', -10)
@@ -66,7 +66,7 @@ export const applyNodeStyles = (
     .filter(d => d.type === 'server-appliance')
     .append('rect')
     .attr('class', 'node-rect')
-    .attr('class', 'fill-node-server-light dark:fill-node-server-dark')
+    .attr('class', 'tg-fill-node-server-light dark:tg-fill-node-server-dark')
     .attr('width', 20)
     .attr('height', 20)
     .attr('x', -10)
@@ -87,7 +87,7 @@ export const applyLabelStyles = (
   labelsSelection: d3.Selection<SVGElement, Node, SVGElement, unknown>,
 ) => {
   labelsSelection
-    .attr('class', 'fill-label-light dark:fill-label-dark')
+    .attr('class', 'tg-fill-label-light dark:tg-fill-label-dark')
     .attr('dy', -3)
     .text(d => d.id);
 };
@@ -101,7 +101,7 @@ export const applyLinkStyles = (
 ) => {
   // Styling for regular links
   linksSelection
-    .attr('class', 'link stroke-link-light dark:stroke-link-dark')
+    .attr('class', 'link tg-stroke-link-light dark:tg-stroke-link-dark')
     .attr('stroke-width', 1);
 
   // Styling for directed links (integration links with arrowheads)

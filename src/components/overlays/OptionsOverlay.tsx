@@ -17,35 +17,37 @@ const OptionsOverlay: React.FC<OptionsOverlayProps> = ({ onClose, onChangeView }
 
   return (
     <div
-      className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center"
+      className="tg-fixed tg-inset-0 tg-bg-gray-900 tg-bg-opacity-75 tg-flex tg-items-center tg-justify-center"
       onClick={handleClickOutside}
     >
       <div
         ref={modalRef}
-        className="bg-white dark:bg-gray-800 rounded-lg p-6 w-80 shadow-lg relative"
+        className="tg-bg-white dark:tg-bg-gray-800 tg-rounded-lg tg-p-6 tg-w-80 tg-shadow-lg tg-relative"
       >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Options</h2>
+        <div className="tg-flex tg-justify-between tg-items-center tg-mb-4">
+          <h2 className="tg-text-xl tg-font-semibold tg-text-gray-900 dark:tg-text-white">
+            Options
+          </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-500"
+            className="tg-text-gray-500 dark:tg-text-gray-300 hover:tg-text-gray-700 dark:hover:tg-text-gray-500"
           >
             <IoCloseSharp />
           </button>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="tg-flex tg-flex-col tg-gap-2">
           <button
             type="button"
             onClick={event => onChangeView('planar', event)}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            className="tg-w-full tg-px-4 tg-py-2 tg-bg-blue-600 tg-text-white tg-rounded-md hover:tg-bg-blue-700 tg-focus:ring-2 tg-focus:ring-blue-400 tg-focus:ring-opacity-75"
           >
             Planar View
           </button>
           <button
             type="button"
             onClick={event => onChangeView('cluster', event)}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            className="tg-w-full tg-px-4 tg-py-2 tg-bg-blue-600 tg-text-white tg-rounded-md hover:tg-bg-blue-700 tg-focus:ring-2 tg-focus:ring-blue-400 tg-focus:ring-opacity-75"
           >
             Louvain Cluster
           </button>

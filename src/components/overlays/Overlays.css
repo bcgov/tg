@@ -1,24 +1,24 @@
-.degree-label {
+.tg-degree-label {
   display: flex;
   align-items: center;
   font-size: 14px;
   color: #ffffff;
 }
 
-.slider {
+.tg-slider {
   margin-left: 10px;
   margin-right: 10px;
   width: 200px; /* Aligned with the search bar */
 }
 
-.legend-icon-container {
+.tg-legend-icon-container {
   position: fixed;
   bottom: 50px;
   left: 50px;
   cursor: pointer;
 }
 
-.legend-icon {
+.tg-legend-icon {
   width: 30px;
   height: 30px;
   background-color: #333;
@@ -31,7 +31,7 @@
   font-weight: bold;
 }
 
-.legend-overlay {
+.tg-legend-overlay {
   position: fixed;
   bottom: 20px;
   left: 20px;
@@ -41,31 +41,31 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.legend-item {
+.tg-legend-item {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
 
-.legend-shape {
+.tg-legend-shape {
   width: 20px;
   height: 20px;
   margin-right: 10px;
 }
 
-.legend-circle {
+.tg-legend-circle {
   background: #0097e6; /* Default color for Application */
   border-radius: 50%;
 }
 
-.legend-square {
+.tg-legend-square {
   background: #44bd32; /* Default color for Technology */
 }
 
-.legend-red {
+.tg-legend-red {
   background: #c23616; /* Color for Past EOL */
 }
 
-.legend-orange {
+.tg-legend-orange {
   background: #e1b12c; /* Color for Nearing EOL */
 }

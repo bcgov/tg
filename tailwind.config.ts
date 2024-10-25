@@ -8,6 +8,7 @@ const config: Config = {
     'variant',
     ['@media (prefers-color-scheme: dark) { &:not(.light *) }', '&:is(.dark *)'],
   ],
+  prefix: "tg-",
   theme: {
     fontSize: {
       xs: [

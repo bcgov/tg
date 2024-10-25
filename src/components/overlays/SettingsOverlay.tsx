@@ -28,57 +28,59 @@ const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center"
+      className="tg-fixed tg-inset-0 tg-bg-gray-900 tg-bg-opacity-75 tg-flex tg-items-center tg-justify-center"
       onClick={handleClickOutside}
     >
       <div
         ref={modalRef}
-        className="bg-white dark:bg-gray-800 rounded-lg p-6 w-80 shadow-lg relative"
+        className="tg-bg-white dark:tg-bg-gray-800 tg-rounded-lg tg-p-6 tg-w-80 tg-shadow-lg tg-relative"
       >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Settings</h2>
+        <div className="tg-flex tg-justify-between tg-items-center tg-mb-4">
+          <h2 className="tg-text-xl tg-font-semibold tg-text-gray-900 dark:tg-text-white">
+            Settings
+          </h2>
           <button
             type="button"
             onClick={onClose}
-            className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-500"
+            className="tg-text-gray-500 dark:tg-text-gray-300 hover:tg-text-gray-700 dark:hover:tg-text-gray-500"
           >
             <IoCloseSharp />
           </button>
         </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <label htmlFor="isolatedNodesToggle" className="text-gray-700 dark:text-gray-300">
+        <div className="tg-flex tg-items-center tg-justify-between tg-mb-4">
+          <label htmlFor="isolatedNodesToggle" className="tg-text-gray-700 dark:tg-text-gray-300">
             Hide Isolated Nodes
           </label>
           <input
             id="isolatedNodesToggle"
             type="checkbox"
-            className="w-5 h-5 text-blue-600 rounded-md focus:ring-2 focus:ring-blue-400 dark:bg-gray-600"
+            className="tg-w-5 tg-h-5 tg-text-blue-600 tg-rounded-md tg-focus:ring-2 tg-focus:ring-blue-400 dark:tg-bg-gray-600"
             checked={showIsolatedNode}
             onChange={onHandleIsolatedNodes}
           />
         </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-gray-700 dark:text-gray-300">Dark Mode</span>
+        <div className="tg-flex tg-items-center tg-justify-between tg-mb-4">
+          <span className="tg-text-gray-700 dark:tg-text-gray-300">Dark Mode</span>
           <button
             type="button"
             onClick={darkModeHandler}
-            className="flex items-center justify-center p-2 w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none"
+            className="tg-flex tg-items-center tg-justify-center tg-p-2 tg-w-12 tg-h-12 tg-rounded-full tg-bg-gray-200 dark:tg-bg-gray-700 hover:tg-bg-gray-300 dark:hover:tg-bg-gray-600 tg-focus:outline-none"
           >
             {dark ? (
-              <IoSunny className="text-yellow-500" />
+              <IoSunny className="tg-text-yellow-500" />
             ) : (
-              <IoMoon className="text-gray-900 dark:text-gray-300" />
+              <IoMoon className="tg-text-gray-900 dark:tg-text-gray-300" />
             )}
           </button>
         </div>
 
-        <div className="flex justify-end mt-6">
+        <div className="tg-flex tg-justify-end tg-mt-6">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            className="tg-px-4 tg-py-2 tg-bg-blue-600 tg-text-white tg-rounded-md hover:tg-bg-blue-700 tg-focus:ring-2 tg-focus:ring-blue-400 tg-focus:ring-opacity-75"
           >
             Close
           </button>

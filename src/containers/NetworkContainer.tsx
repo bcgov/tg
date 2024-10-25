@@ -59,15 +59,15 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
   }, [searchQuery]);
 
   return (
-    <div className="bg-background-light dark:bg-background-dark">
-      <div className="search-bar m-5 shadow-md space-y-4 absolute left-0 top-0 bg-unit-light dark:bg-unit-dark ">
+    <div className="tg-bg-background-light dark:tg-bg-background-dark">
+      <div className="tg-search-bar tg-m-5 tg-shadow-md tg-space-y-4 tg-absolute tg-left-0 tg-top-0 tg-bg-unit-light dark:tg-bg-unit-dark tg-">
         <input
           type="text"
           value={searchQuery}
           onChange={handleSearch}
           onKeyDown={e => handleKeyDown(e)}
           placeholder="Search"
-          className="rounded-small border-2 border-stroke-light dark:border-0 dark:placeholder-label2-dark bg-unit-light dark:bg-stroke-dark"
+          className="tg-rounded-small tg-border-2 tg-border-stroke-light dark:tg-border-0 dark:tg-placeholder-label2-dark tg-bg-unit-light dark:tg-bg-stroke-dark"
         />
       </div>
       <NetworkGraph
@@ -80,29 +80,29 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
         context={context}
       />
       <LegendOverlay />
-      <div className="relative bg-gray-50 dark:bg-slate-900 w-screen h-screen pattern">
-        <nav className="z-20 flex shrink-0 grow-0 justify-around bg-white/50 shadow-lg backdrop-blur-lg dark:bg-slate-800/50 fixed top-2/4 -translate-y-2/4 right-6 min-h-[auto] min-w-[64px] flex-col rounded-lg">
+      <div className="tg-relative tg-bg-gray-50 dark:tg-bg-slate-900 tg-w-screen tg-h-screen tg-pattern">
+        <nav className="tg-z-20 tg-flex tg-shrink-0 tg-grow-0 tg-justify-around tg-bg-white/50 tg-shadow-lg tg-backdrop-blur-lg dark:tg-bg-slate-800/50 tg-fixed tg-top-2/4 tg--translate-y-2/4 tg-right-6 tg-min-h-[auto] tg-min-w-[64px] tg-flex-col tg-rounded-lg">
           <a
             href="/"
-            className="flex h-16 w-16 flex-col items-center justify-center gap-1 dark:text-gray-400"
+            className="tg-flex tg-h-16 tg-w-16 tg-flex-col tg-items-center tg-justify-center tg-gap-1 dark:tg-text-gray-400"
           >
             <io5.IoHomeSharp size={21} />
-            <small className="text-xs font-medium">Home</small>
+            <small className="tg-text-xs tg-font-medium">Home</small>
           </a>
-          <hr className="dark:border-gray-700/60" />
+          <hr className="dark:tg-border-gray-700/60" />
           <button
             onClick={() => setOptionsVisible(true)}
-            className="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800"
+            className="tg-flex tg-aspect-square tg-min-h-[32px] tg-w-16 tg-flex-col tg-items-center tg-justify-center tg-gap-1 tg-rounded-md tg-p-1.5 tg-text-gray-700 hover:tg-bg-gray-100 dark:tg-text-gray-400 dark:hover:tg-bg-slate-800"
           >
             <io5.IoOptionsSharp size={21} />
-            <small className="text-center text-xs font-medium">Options</small>
+            <small className="tg-text-center tg-text-xs tg-font-medium">Options</small>
           </button>
           <button
             onClick={() => setSettingsVisible(true)}
-            className="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800"
+            className="tg-flex tg-aspect-square tg-min-h-[32px] tg-w-16 tg-flex-col tg-items-center tg-justify-center tg-gap-1 tg-rounded-md tg-p-1.5 tg-text-gray-700 hover:tg-bg-gray-100 dark:tg-text-gray-400 dark:hover:tg-bg-slate-800"
           >
             <io5.IoSettingsSharp size={21} />
-            <small className="text-center text-xs font-medium">Settings</small>
+            <small className="tg-text-center tg-text-xs tg-font-medium">Settings</small>
           </button>
         </nav>
       </div>

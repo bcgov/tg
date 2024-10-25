@@ -13,11 +13,11 @@ svg {
   display: block;
 }
 
-.node {
+.tg-node {
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
-.link {
+.tg-link {
   stroke-opacity: 0.6;
 }
