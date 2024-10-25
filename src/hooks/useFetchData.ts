@@ -1,43 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { IInputs } from '../generated/ManifestTypes';
 import axios from 'axios';
-
-interface Technology {
-  cr57a_technologyname: string;
-  cr57a_technologiesid: string;
-  cr57a_eoldate: string;
-}
-
-interface Application {
-  cr57a_appshortcode: string;
-  cr57a_appscatalogueid: string;
-  cr57a_productowner: string;
-  cr57a_risklevel: number;
-}
-
-interface ApplicationTechnology {
-  _cr57a_appshortcode_value: string;
-  _cr57a_technology_value: string;
-}
-
-interface AppHostingServer {
-  cr57a_apphostingserverid: string;
-  _cr57a_databaseserver_value: string;
-  _cr57a_serverappliance_value: string;
-  cr57a_openshiftnamespace: string;
-  _cr57a_appshortcode_value: string;
-  _cr57a_appname_value: string;
-  cr57a_category: number;
-  cr57a_appserver: string | null;
-  cr57a_storage: string | null;
-}
-
-interface ApplicationIntegrations {
-  _cr57a_appshortcode_value: string;
-  _cr57a_upstreamapplication_value: string;
-  _cr57a_downstreamapplication_value: string;
-  cr57a_commoncomponent: number;
-}
+import {
+  Technology,
+  Application,
+  ApplicationIntegrations,
+  ApplicationTechnology,
+  AppEnvironments,
+} from '../types/ResponseTypes';
 
 interface FetchDataParams {
   context?: ComponentFramework.Context<IInputs>;
@@ -46,15 +16,13 @@ interface FetchDataParams {
 const useFetchData = ({ context }: FetchDataParams = {}) => {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
-  const [applicationTechnologies, setApplicationTechnologies] = useState<
-    ApplicationTechnology[]
-  >([]);
-  const [applicationIntegrations, setApplicationIntegrations] = useState<
-    ApplicationIntegrations[]
-  >([]);
-  const [applicationEnvironments, setApplicationEnvironments] = useState<
-    AppHostingServer[]
-  >([]);
+  const [applicationTechnologies, setApplicationTechnologies] = useState<ApplicationTechnology[]>(
+    [],
+  );
+  const [applicationIntegrations, setApplicationIntegrations] = useState<ApplicationIntegrations[]>(
+    [],
+  );
+  const [applicationEnvironments, setApplicationEnvironments] = useState<AppEnvironments[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const isPCF = !!context;
@@ -67,8 +35,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
         'OData-MaxVersion': '4.0',
         'OData-Version': '4.0',
         Accept: 'application/json',
-        Prefer:
-          'odata.include-annotations=OData.Community.Display.V1.FormattedValue',
+        Prefer: 'odata.include-annotations=OData.Community.Display.V1.FormattedValue',
       },
     });
   };
@@ -113,7 +80,6 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
       setApplicationTechnologies(appTechResponse.data.value);
       setApplicationIntegrations(appIntegrationsResponse.data.value);
       setApplicationEnvironments(appHostingServerResponse.data.value);
-      console.log('API USED');
     } catch (error) {
       console.error('Error fetching authenticated data:', error);
     }
@@ -146,13 +112,9 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
       );
       setApplications(appFetch.entities as Application[]);
       setTechnologies(techFetch.entities as Technology[]);
-      setApplicationTechnologies(
-        appTechFetch.entities as ApplicationTechnology[],
-      );
-      setApplicationIntegrations(
-        appIntFetch.entities as ApplicationIntegrations[],
-      );
-      setApplicationEnvironments(appEnvFetch.entities as AppHostingServer[]);
+      setApplicationTechnologies(appTechFetch.entities as ApplicationTechnology[]);
+      setApplicationIntegrations(appIntFetch.entities as ApplicationIntegrations[]);
+      setApplicationEnvironments(appEnvFetch.entities as AppEnvironments[]);
     }
   };
 
@@ -175,7 +137,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
     };
 
     fetchData();
-  }, [context, isPCF]);
+  }, []);
 
   return {
     technologies,

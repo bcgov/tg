@@ -25,3 +25,15 @@
     font-family: InterVariable, sans-serif;
   }
 }
+
+.control-pane {
+  padding: 0 !important;
+}
+
+.navbar {
+  display: none !important;
+}
+
+.io-pane {
+  display: none !important;
+}

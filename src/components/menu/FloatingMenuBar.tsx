@@ -6,10 +6,7 @@ interface FloatingMenuProps {
   onToggleViewMode: (mode: ViewMode, event: React.MouseEvent) => void;
 }
 
-const FloatingMenu: React.FC<FloatingMenuProps> = ({
-  activeViewMode,
-  onToggleViewMode,
-}) => {
+const FloatingMenu: React.FC<FloatingMenuProps> = ({ activeViewMode, onToggleViewMode }) => {
   const viewModes = [
     { mode: ViewMode.Default, label: 'Technologies' },
     { mode: ViewMode.Integrations, label: 'Integrations' },

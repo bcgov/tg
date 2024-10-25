@@ -3,7 +3,7 @@
  * - Describes how nodes and links should look for each category
  */
 
-import { Node, Link } from '../utils/NodeTypes';
+import { Node, Link } from '../types/NodeTypes';
 import { DATETIME } from '../utils/const';
 import * as d3 from 'd3';
 
@@ -11,7 +11,7 @@ import * as d3 from 'd3';
  * Styles for nodes based on their type and properties
  */
 export const applyNodeStyles = (
-  nodesSelection: d3.Selection<any, Node, any, any>,
+  nodesSelection: d3.Selection<SVGElement, Node, SVGElement, unknown>,
 ) => {
   // Append `rect` for technology nodes
   nodesSelection
@@ -26,11 +26,7 @@ export const applyNodeStyles = (
     .attr('class', d => {
       if (d.eolDate && d.eolDate < DATETIME.TODAY) {
         return 'fill-node-app-peol-light dark:fill-node-app-peol-dark'; // Past d.eolDate
-      } else if (
-        d.eolDate &&
-        d.eolDate >= DATETIME.TODAY &&
-        d.eolDate <= DATETIME.EOL_NEAR
-      ) {
+      } else if (d.eolDate && d.eolDate >= DATETIME.TODAY && d.eolDate <= DATETIME.EOL_NEAR) {
         return 'fill-node-app-neol-dark'; // Nearing eolDate
       } else {
         return 'fill-node-tech-light dark:fill-node-tech-dark'; // Default color
@@ -88,7 +84,7 @@ export const applyNodeStyles = (
  * Styles for node labels, adjusting the font size and color for readability
  */
 export const applyLabelStyles = (
-  labelsSelection: d3.Selection<any, Node, any, any>,
+  labelsSelection: d3.Selection<SVGElement, Node, SVGElement, unknown>,
 ) => {
   labelsSelection
     .attr('class', 'fill-label-light dark:fill-label-dark')
@@ -100,8 +96,8 @@ export const applyLabelStyles = (
  * Styles for links between nodes, including integration links with arrowheads
  */
 export const applyLinkStyles = (
-  linksSelection: d3.Selection<any, Link, any, any>,
-  directedLinksSelection: d3.Selection<any, Link, any, any>,
+  linksSelection: d3.Selection<SVGLineElement, Link, SVGGElement, unknown>,
+  directedLinksSelection: d3.Selection<SVGLineElement, Link, SVGGElement, unknown>,
 ) => {
   // Styling for regular links
   linksSelection

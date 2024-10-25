@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { Node } from '../utils/NodeTypes';
+import { Node } from '../types/NodeTypes';
 
 export const drawConvexHulls = (
   g: d3.Selection<SVGGElement, unknown, null, undefined>,
@@ -10,9 +10,10 @@ export const drawConvexHulls = (
   const hullData: [number, number][][] = [];
 
   clusters.forEach(nodeGroup => {
-    const points = nodeGroup.map(
-      node => [node.x!, node.y!] as [number, number],
-    );
+    const points = nodeGroup
+      .filter(node => node.x !== undefined && node.y !== undefined)
+      .map(node => [node.x as number, node.y as number] as [number, number]);
+
     const hull = d3.polygonHull(points);
     if (hull) {
       hullData.push(hull);
@@ -20,13 +21,13 @@ export const drawConvexHulls = (
   });
 
   // Draw hulls behind nodes
-  const hulls = g.selectAll('.hull').data(hullData);
+  const hulls = g.selectAll<SVGPathElement, [number, number][]>('.hull').data(hullData);
 
   hulls
     .enter()
     .append('path')
     .attr('class', 'hull')
-    .merge(hulls as any)
+    .merge(hulls)
     .attr('d', d => 'M' + d.join('L') + 'Z')
     .attr('fill', 'rgba(173, 216, 230, 0.3)') // Light blue with some opacity
     .attr('stroke', 'steelblue')

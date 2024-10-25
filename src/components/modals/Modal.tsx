@@ -18,10 +18,7 @@ interface Node {
   githubInfo?: string | null;
 }
 
-const Modal: React.FC<{ onClose: () => void; node: Node }> = ({
-  onClose,
-  node,
-}) => {
+const Modal: React.FC<{ onClose: () => void; node: Node }> = ({ onClose, node }) => {
   // MOCKUP PURPOSE ONLY. REMOVE
   const mock = {
     openshiftInfo: `Project: my-project
@@ -43,9 +40,7 @@ Actions: Passed`,
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Node Information
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Node Information</h2>
           <button
             type="button"
             className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-500"
@@ -68,8 +63,7 @@ Actions: Passed`,
           </p>
           {node.type === 'technology' ? (
             <p className="text-gray-700 dark:text-gray-300">
-              <strong>EOL Date:</strong>{' '}
-              {node.eolDate ? node.eolDate.toDateString() : 'N/A'}
+              <strong>EOL Date:</strong> {node.eolDate ? node.eolDate.toDateString() : 'N/A'}
             </p>
           ) : (
             <>

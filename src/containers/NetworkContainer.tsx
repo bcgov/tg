@@ -19,7 +19,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
   const [view, setView] = useState(ViewMode.Default); // Default view mode
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState(searchQuery);
-  const [degree, setDegree] = useState(2);
+  const [degree] = useState(2);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState(false);
 
   const handleViewChange = (newView: ViewMode, event: React.MouseEvent) => {
@@ -42,6 +42,12 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
     setShowIsolatedNodes(!showIsolatedNodes);
   };
 
+  const handleKeyDown = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+    }
+  };
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedQuery(searchQuery);
@@ -59,6 +65,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
           type="text"
           value={searchQuery}
           onChange={handleSearch}
+          onKeyDown={e => handleKeyDown(e)}
           placeholder="Search"
           className="rounded-small border-2 border-stroke-light dark:border-0 dark:placeholder-label2-dark bg-unit-light dark:bg-stroke-dark"
         />
@@ -107,10 +114,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
         />
       )}
       {optionsVisible && (
-        <OptionsOverlay
-          onClose={() => setOptionsVisible(false)}
-          onChangeView={handleViewChange}
-        />
+        <OptionsOverlay onClose={() => setOptionsVisible(false)} onChangeView={handleViewChange} />
       )}
       <FloatingMenu
         activeViewMode={view}

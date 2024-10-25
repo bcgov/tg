@@ -1,4 +1,4 @@
-import { Node, Link } from './NodeTypes';
+import { Node, Link } from '../types/NodeTypes';
 
 export const findNodesWithinDegrees = (
   nodes: Node[],

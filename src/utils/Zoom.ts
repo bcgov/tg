@@ -6,10 +6,5 @@ export function setupZoom(svg, g, width, height) {
     .scaleExtent([0.1, 10])
     .on('zoom', event => g.attr('transform', event.transform));
 
-  svg
-    .call(zoom)
-    .call(
-      zoom.transform,
-      d3.zoomIdentity.translate(width / 3, height / 3).scale(0.4),
-    );
+  svg.call(zoom).call(zoom.transform, d3.zoomIdentity.translate(width / 3, height / 3).scale(0.4));
 }

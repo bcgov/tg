@@ -6,10 +6,7 @@ interface OptionsOverlayProps {
   onChangeView: (view: string, event: React.MouseEvent) => void;
 }
 
-const OptionsOverlay: React.FC<OptionsOverlayProps> = ({
-  onClose,
-  onChangeView,
-}) => {
+const OptionsOverlay: React.FC<OptionsOverlayProps> = ({ onClose, onChangeView }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -28,9 +25,7 @@ const OptionsOverlay: React.FC<OptionsOverlayProps> = ({
         className="bg-white dark:bg-gray-800 rounded-lg p-6 w-80 shadow-lg relative"
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Options
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Options</h2>
           <button
             onClick={onClose}
             className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-500"

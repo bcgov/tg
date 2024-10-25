@@ -36,9 +36,7 @@ const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
         className="bg-white dark:bg-gray-800 rounded-lg p-6 w-80 shadow-lg relative"
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Settings
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Settings</h2>
           <button
             type="button"
             onClick={onClose}
@@ -49,10 +47,7 @@ const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
         </div>
 
         <div className="flex items-center justify-between mb-4">
-          <label
-            htmlFor="isolatedNodesToggle"
-            className="text-gray-700 dark:text-gray-300"
-          >
+          <label htmlFor="isolatedNodesToggle" className="text-gray-700 dark:text-gray-300">
             Hide Isolated Nodes
           </label>
           <input

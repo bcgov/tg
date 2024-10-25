@@ -1,16 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
-module.exports = {
+import defaultTheme from 'tailwindcss/defaultTheme';
+import { Config } from 'tailwindcss';
+
+const config: Config = {
   mode: 'jit',
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  purge: ['./src/**/*.html', './src/**/*.js'],
   darkMode: [
     'variant',
-    [
-      '@media (prefers-color-scheme: dark) { &:not(.light *) }',
-      '&:is(.dark *)',
-    ],
+    ['@media (prefers-color-scheme: dark) { &:not(.light *) }', '&:is(.dark *)'],
   ],
   theme: {
     fontSize: {
@@ -95,7 +91,7 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        thick: '0px 7px 32px rgb(0 0 0 / 35%);',
+        thick: '0px 7px 32px rgb(0 0 0 / 35%)',
       },
       colors: {
         background: {
@@ -156,7 +152,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        stock: [defaultTheme.fontFamily.sans],
+        stock: [...defaultTheme.fontFamily.sans],
       },
     },
   },
@@ -165,3 +161,5 @@ module.exports = {
     // ...
   ],
 };
+
+export default config;

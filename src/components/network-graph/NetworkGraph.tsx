@@ -1,18 +1,9 @@
 import React, { useRef, useEffect, useState, Suspense } from 'react';
 import * as d3 from 'd3';
 import useFetchData from '../../hooks/useFetchData';
-import {
-  setupSimulation,
-  updateSimulationForView,
-  applySearch,
-  VIEW_OPTIONS,
-} from './Simulations';
-import { Node, Link } from '../../utils/NodeTypes';
-import {
-  handleDragStarted,
-  handleDragged,
-  handleDragEnded,
-} from './NodeDragHandlers';
+import { setupSimulation, updateSimulationForView, applySearch, VIEW_OPTIONS } from './Simulations';
+import { Node, Link } from '../../types/NodeTypes';
+import { handleDragStarted, handleDragged, handleDragEnded } from './NodeDragHandlers';
 import './NetworkGraph.css';
 import { drawConvexHulls } from '../../utils/ConvexHulls';
 import { findNodesWithinDegrees } from '../../utils/findNodesWithinDegrees';
@@ -67,21 +58,16 @@ const NetworkGraph: React.FC<{
       return;
     }
 
-    const {
-      allNodes,
-      appTechLinks,
-      integrationLinks,
-      commonComponentLinks,
-      appEnvironmentLinks,
-    } = processNodesAndLinks(
-      applications,
-      technologies,
-      applicationTechnologies,
-      applicationIntegrations,
-      showAppIntegrations,
-      showAppEnvironments,
-      applicationEnvironments,
-    );
+    const { allNodes, appTechLinks, integrationLinks, commonComponentLinks, appEnvironmentLinks } =
+      processNodesAndLinks(
+        applications,
+        technologies,
+        applicationTechnologies,
+        applicationIntegrations,
+        showAppIntegrations,
+        showAppEnvironments,
+        applicationEnvironments,
+      );
 
     const links = showAppEnvironments
       ? appEnvironmentLinks
@@ -90,9 +76,7 @@ const NetworkGraph: React.FC<{
         : appTechLinks;
 
     // Create a set of all node IDs that are referenced in any links
-    const linkedNodeIds = new Set(
-      links.flatMap(link => [link.source, link.target]),
-    );
+    const linkedNodeIds = new Set(links.flatMap(link => [link.source, link.target]));
 
     // Filter nodes based on the current view and hideUnlinkedNodes flag
     const nodes = allNodes.filter(node => {
@@ -127,23 +111,19 @@ const NetworkGraph: React.FC<{
 
     // Helper function to set opacity based on degrees of separation.
     const updateOpacity = (
-      nodesSelection: d3.Selection<any, Node, any, any>,
-      linksSelection: d3.Selection<any, Link, any, any>,
-      labelsSelection: d3.Selection<any, Node, any, any>,
+      nodesSelection: d3.Selection<SVGElement, Node, SVGElement, unknown>,
+      linksSelection: d3.Selection<SVGLineElement, Link, SVGGElement, unknown>,
+      labelsSelection: d3.Selection<SVGElement, Node, SVGElement, unknown>,
       nodesWithinDegrees: Set<string>,
     ) => {
-      nodesSelection.style('opacity', n =>
-        nodesWithinDegrees.has(n.id) ? 1 : 0.2,
-      );
+      nodesSelection.style('opacity', n => (nodesWithinDegrees.has(n.id) ? 1 : 0.2));
       linksSelection.style('opacity', l =>
         nodesWithinDegrees.has((l.source as Node).id) &&
         nodesWithinDegrees.has((l.target as Node).id)
           ? 1
           : 0.2,
       );
-      labelsSelection.style('opacity', n =>
-        nodesWithinDegrees.has(n.id) ? 1 : 0.2,
-      );
+      labelsSelection.style('opacity', n => (nodesWithinDegrees.has(n.id) ? 1 : 0.2));
     };
 
     // Add links, nodes, and node labels to the graph
@@ -191,12 +171,7 @@ const NetworkGraph: React.FC<{
     // Attach Event Handlers
     node
       .on('click', (event, d) => {
-        const nodesWithinDegrees = findNodesWithinDegrees(
-          nodes,
-          links,
-          d.id,
-          degree,
-        );
+        const nodesWithinDegrees = findNodesWithinDegrees(nodes, links, d.id, degree);
         updateOpacity(node, link, labels, nodesWithinDegrees);
         event.stopPropagation();
       })
@@ -209,7 +184,7 @@ const NetworkGraph: React.FC<{
         d3
           .drag<SVGCircleElement, Node>()
           .on('start', handleDragStarted(simulation))
-          .on('drag', handleDragged(simulation))
+          .on('drag', handleDragged())
           .on('end', handleDragEnded(simulation)),
       );
 
@@ -226,10 +201,10 @@ const NetworkGraph: React.FC<{
         .attr('y2', d => (d.target as Node).y ?? 0);
 
       directedLink
-        .attr('x1', d => (d.source as any).x)
-        .attr('y1', d => (d.source as any).y)
-        .attr('x2', d => (d.target as any).x)
-        .attr('y2', d => (d.target as any).y);
+        .attr('x1', d => (d.source as Node).x)
+        .attr('y1', d => (d.source as Node).y)
+        .attr('x2', d => (d.target as Node).x)
+        .attr('y2', d => (d.target as Node).y);
 
       // Position circles
       node
@@ -252,16 +227,7 @@ const NetworkGraph: React.FC<{
     });
 
     // Handle search query
-    applySearch(
-      g,
-      nodes,
-      links,
-      simulation,
-      searchQuery,
-      degree,
-      width,
-      height,
-    );
+    applySearch(g, nodes, links, simulation, searchQuery, degree, width, height);
 
     // Update simulation based on the view
     updateSimulationForView(simulation, view, nodes, links, width, height);
@@ -277,6 +243,7 @@ const NetworkGraph: React.FC<{
     applications,
     applicationTechnologies,
     applicationIntegrations,
+    applicationEnvironments,
     showAppIntegrations,
     showAppEnvironments,
     showIsolatedNodes,
@@ -287,10 +254,8 @@ const NetworkGraph: React.FC<{
   ]);
 
   if (loading) {
-    console.log('IS LOADING');
     return <LoadingScreen />;
   } else {
-    console.log('SHOULD RENDER');
     return (
       <div>
         <svg ref={svgRef}></svg>

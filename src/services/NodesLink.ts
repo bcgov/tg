@@ -4,17 +4,24 @@
  * - Creates Node and Link objects without describing how they should look
  */
 
-import { Node, Link } from '../utils/NodeTypes';
+import { Node, Link } from '../types/NodeTypes';
+import {
+  AppEnvironments,
+  Application,
+  ApplicationIntegrations,
+  ApplicationTechnology,
+  Technology,
+} from '../types/ResponseTypes';
 
 // Function to process nodes from applications and technologies
 export const processNodesAndLinks = (
-  applications: any[],
-  technologies: any[],
-  applicationTechnologies: any[],
-  applicationIntegrations: any[],
+  applications: Application[],
+  technologies: Technology[],
+  applicationTechnologies: ApplicationTechnology[],
+  applicationIntegrations: ApplicationIntegrations[],
   showAppIntegrations: boolean,
   showAppEnvironments: boolean,
-  appHostingServers: any[],
+  appHostingServers: AppEnvironments[],
 ) => {
   const nodesMap: { [key: string]: Node } = {};
 
@@ -37,13 +44,11 @@ export const processNodesAndLinks = (
 
   const appTechLinks: Link[] = applicationTechnologies.map(appTech => ({
     source:
-      applications.find(
-        app => app.cr57a_appscatalogueid === appTech._cr57a_appshortcode_value,
-      )?.cr57a_appshortcode || '',
+      applications.find(app => app.cr57a_appscatalogueid === appTech._cr57a_appshortcode_value)
+        ?.cr57a_appshortcode || '',
     target:
-      technologies.find(
-        tech => tech.cr57a_technologiesid === appTech._cr57a_technology_value,
-      )?.cr57a_technologyname || '',
+      technologies.find(tech => tech.cr57a_technologiesid === appTech._cr57a_technology_value)
+        ?.cr57a_technologyname || '',
   }));
 
   // Handle integration links if needed
@@ -53,13 +58,10 @@ export const processNodesAndLinks = (
   if (showAppIntegrations) {
     applicationIntegrations.forEach(integration => {
       const targetApp = applications.find(
-        app =>
-          app.cr57a_appscatalogueid === integration._cr57a_appshortcode_value,
+        app => app.cr57a_appscatalogueid === integration._cr57a_appshortcode_value,
       )?.cr57a_appshortcode;
       const upstreamApp = applications.find(
-        app =>
-          app.cr57a_appscatalogueid ===
-          integration._cr57a_upstreamapplication_value,
+        app => app.cr57a_appscatalogueid === integration._cr57a_upstreamapplication_value,
       )?.cr57a_appshortcode;
 
       if (upstreamApp && targetApp) {
@@ -68,9 +70,7 @@ export const processNodesAndLinks = (
 
       if (integration.cr57a_commoncomponent) {
         const commonComponentName =
-          integration[
-            'cr57a_commoncomponent@OData.Community.Display.V1.FormattedValue'
-          ];
+          integration['cr57a_commoncomponent@OData.Community.Display.V1.FormattedValue'];
         if (!nodesMap[commonComponentName]) {
           nodesMap[commonComponentName] = {
             id: commonComponentName,
@@ -104,8 +104,7 @@ export const processNodesAndLinks = (
     // Add new nodes for server appliances and database servers
     appHostingServers.forEach(hostingInfo => {
       const appNode = applications.find(
-        app =>
-          app.cr57a_appscatalogueid === hostingInfo._cr57a_appshortcode_value,
+        app => app.cr57a_appscatalogueid === hostingInfo._cr57a_appshortcode_value,
       );
 
       if (!appNode) return;

@@ -7,7 +7,7 @@ export interface Node extends d3.SimulationNodeDatum {
   fx?: number | null;
   fy?: number | null;
   index?: number | undefined;
-  cluster?: any;
+  cluster?: number | null;
   productOwner?: string | null;
   riskLevel?: number | null;
   eolDate?: Date | null;

@@ -16,10 +16,7 @@ export const BCGovLogo = () => {
           width="1"
           height="1"
         >
-          <use
-            xlinkHref="#image0_3351_1788"
-            transform="scale(0.00480769 0.0125)"
-          />
+          <use xlinkHref="#image0_3351_1788" transform="scale(0.00480769 0.0125)" />
         </pattern>
         <image
           id="image0_3351_1788"

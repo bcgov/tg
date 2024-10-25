@@ -1,15 +1,12 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "settings": {
     "import/resolver": {
       "typescript": {},
@@ -32,7 +29,6 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "import/extensions": [
       "off",
       {
@@ -50,6 +46,6 @@
         }
       }
     ],
-    "prettier/prettier": "error" // Ensure Prettier enforces its own rules
+    "prettier/prettier": ["error"] // Ensure Prettier enforces its own rules
   }
 }

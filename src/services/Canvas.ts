@@ -14,17 +14,9 @@ interface CanvasConfig {
   zoomEnabled?: boolean;
 }
 
-export const setupCanvas = ({
-  svgRef,
-  width,
-  height,
-  zoomEnabled = true,
-}: CanvasConfig) => {
+export const setupCanvas = ({ svgRef, width, height, zoomEnabled = true }: CanvasConfig) => {
   // Select the SVG element from the DOM
-  const svg = d3
-    .select(svgRef.current)
-    .attr('width', width)
-    .attr('height', height);
+  const svg = d3.select(svgRef.current).attr('width', width).attr('height', height);
 
   // Clear any existing content
   svg.selectAll('*').remove();
@@ -59,7 +51,7 @@ export const setupCanvas = ({
 
 export const handleCanvasResize = (
   svgRef: React.RefObject<SVGSVGElement>,
-  simulation: d3.Simulation<any, any>,
+  simulation: d3.Simulation<d3.SimulationNodeDatum, undefined>,
 ) => {
   const handleResize = () => {
     const newWidth = window.innerWidth;
