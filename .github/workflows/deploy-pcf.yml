@@ -57,7 +57,10 @@ jobs:
         run: |
           npm install -g tailwindcss
           npm link tailwindcss
-          npx tailwindcss -i ./src/index.css -o ./src/generated/style.css --minify
+          npx tailwindcss -o ./src/generated/style.css --minify
+
+      - name: List generated CSS
+        run: ls ./src/generated/
 
       # Build the PCF solution
       - name: Build the solution
