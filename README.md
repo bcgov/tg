@@ -75,7 +75,7 @@ Use --watch to watch your changes as more classes are added
 Run it
 
 ```
-npm start
+npm run start:watch
 ```
 
 PCF Context.WebAPI is only given on runtime in a model-driven apps and portals. Since your local development is not treated as such, you have to:
@@ -86,6 +86,14 @@ PCF Context.WebAPI is only given on runtime in a model-driven apps and portals. 
   \*\* For canvas app: https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/streamline-javascript-development-fiddler-autoresponder?view=op-9-1
 
 - Mocking Data Locally: Simply query the API and take those responses as a local JSON files that you use for development.
+
+### Development
+
+Run Tailwind builder in watch mode:
+```
+npx tailwindcss -o ./src/generated/style.css --watch
+```
+Be sure to prefix all Tailwind classes with tg-. For example tg-bg-slate-500. This is because PCF environment uses Bootstrap, and class name overlaps are annoyingly overridden by bootstrap’s !important
 
 ## Deployment
 
