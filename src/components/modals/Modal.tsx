@@ -79,7 +79,10 @@ Actions: Passed`,
           )}
         </section>
 
-        {node.openshiftInfo && (
+        {/**
+         * Disable OpenShift and GitHub information until feature is fully ready.
+         */}
+        {/* {node.openshiftInfo && (
           <section className="tg-mb-4">
             <div className="tg-flex tg-items-center tg-mb-2">
               <img
@@ -113,7 +116,7 @@ Actions: Passed`,
               {node.githubInfo}
             </pre>
           </section>
-        )}
+        )} */}
       </div>
     </div>,
     document.body,
