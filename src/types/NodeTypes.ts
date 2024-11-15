@@ -22,6 +22,8 @@ export interface Node extends d3.SimulationNodeDatum {
   devurl?: string | null;
   produrl?: string | null;
   description?: string | null;
+  openshiftInfo?: string | null;
+  githubInfo?: string | null;
 }
 
 export interface Link extends d3.SimulationLinkDatum<Node> {
