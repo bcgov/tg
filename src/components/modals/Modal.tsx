@@ -16,6 +16,16 @@ interface Node {
   storage?: string | null;
   openshiftInfo?: string | null;
   githubInfo?: string | null;
+  appname?: string | null;
+  businessarea?: string | null;
+  businesssme?: string | null;
+  applicationstatus?: boolean | null;
+  hostingplatform?: string | null;
+  identityintegrations?: string | null;
+  criticalsystem?: boolean | null;
+  devurl?: string | null;
+  produrl?: string | null;
+  description?: string | null;
 }
 
 const Modal: React.FC<{ onClose: () => void; node: Node }> = ({ onClose, node }) => {
@@ -74,6 +84,36 @@ Actions: Passed`,
               </p>
               <p className="tg-text-gray-700 dark:tg-text-gray-300">
                 <strong>Risk Level:</strong> {node.riskLevel || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Name: </strong> {node.appname || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Business Area: </strong> {node.businessarea || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Business SME: </strong> {node.businesssme || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Status: </strong> {node.applicationstatus || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Hosting platform: </strong> {node.hostingplatform || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Identity Integrations: </strong> {node.identityintegrations || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Critical System: </strong> {node.criticalsystem || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>DEV URL: </strong> {node.devurl || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>PROD URL: </strong> {node.produrl || 'N/A'}
+              </p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                <strong>Description: </strong> {node.description || 'N/A'}
               </p>
             </>
           )}

@@ -11,12 +11,14 @@ import {
   ApplicationIntegrations,
   ApplicationTechnology,
   Technology,
+  TechnologyVersion,
 } from '../types/ResponseTypes';
 
 // Function to process nodes from applications and technologies
 export const processNodesAndLinks = (
   applications: Application[],
   technologies: Technology[],
+  techVersions: TechnologyVersion[],
   applicationTechnologies: ApplicationTechnology[],
   applicationIntegrations: ApplicationIntegrations[],
   showAppIntegrations: boolean,
@@ -31,9 +33,21 @@ export const processNodesAndLinks = (
       type: 'application',
       productOwner: app.cr57a_productowner,
       riskLevel: app.cr57a_risklevel ? app.cr57a_risklevel % 10 : null,
+      appname: app.cr57a_appname,
+      businessarea: app.cr57a_businessarea,
+      businesssme: app.cr57a_businesssme,
+      applicationstatus: app.cr57a_applicationstatus,
+      hostingplatform: app['cr57a_hostingplatform@OData.Community.Display.V1.FormattedValue'],
+      identityintegrations:
+        app['cr57a_identityintegrations@OData.Community.Display.V1.FormattedValue'],
+      criticalsystem: app.cr57a_criticalsystem,
+      devurl: app.cr57a_devurl,
+      produrl: app.cr57a_produrl,
+      description: app.cr57a_description,
     };
   });
 
+  // Create nodes for each technology and its versions
   technologies.forEach(tech => {
     nodesMap[tech.cr57a_technologyname] = {
       id: tech.cr57a_technologyname,
@@ -42,14 +56,58 @@ export const processNodesAndLinks = (
     };
   });
 
-  const appTechLinks: Link[] = applicationTechnologies.map(appTech => ({
-    source:
-      applications.find(app => app.cr57a_appscatalogueid === appTech._cr57a_appshortcode_value)
-        ?.cr57a_appshortcode || '',
-    target:
-      technologies.find(tech => tech.cr57a_technologiesid === appTech._cr57a_technology_value)
-        ?.cr57a_technologyname || '',
-  }));
+  //   // Create nodes for each version of the technology
+  //   techVersions
+  //     .filter(version => version._imb_technology_value === tech.cr57a_technologiesid)
+  //     .forEach(version => {
+  //       const versionedId = `${tech.cr57a_technologyname} ${version.imb_version}`;
+  //       nodesMap[versionedId] = {
+  //         id: versionedId,
+  //         type: 'technology',
+  //         eolDate: version.imb_eoldate ? new Date(version.imb_eoldate) : null,
+  //       };
+  //     });
+  // });
+
+  techVersions.forEach(version => {
+    const technology = technologies.find(
+      tech => tech.cr57a_technologiesid === version._imb_technology_value,
+    );
+
+    if (technology) {
+      const versionedId = `${technology.cr57a_technologyname} ${version.imb_version}`;
+      nodesMap[versionedId] = {
+        id: versionedId,
+        type: 'technology',
+        eolDate: version.imb_eoldate ? new Date(version.imb_eoldate) : null,
+      };
+    }
+  });
+
+  // Process application-technologies relationships to link applications to specific technology versions
+  const appTechLinks: Link[] = applicationTechnologies
+    .map(appTech => {
+      const sourceApp = applications.find(
+        app => app.cr57a_appscatalogueid === appTech._cr57a_appshortcode_value,
+      );
+      const targetVersion = techVersions.find(
+        version => version.imb_technologyversionid === appTech._imb_technologyversion_value,
+      );
+
+      // Ensure `source` and `target` are strings, defaulting to empty string if undefined
+      const source = String(sourceApp?.cr57a_appshortcode || '');
+      const target = targetVersion
+        ? `${String(
+            technologies.find(
+              tech => tech.cr57a_technologiesid === targetVersion._imb_technology_value,
+            )?.cr57a_technologyname || '',
+          )} ${targetVersion.imb_version}`
+        : '';
+
+      // Only return links where both `source` and `target` are non-empty strings
+      return source && target ? ({ source, target } as Link) : null;
+    })
+    .filter((link): link is Link => link !== null);
 
   // Handle integration links if needed
   const integrationLinks: Link[] = [];

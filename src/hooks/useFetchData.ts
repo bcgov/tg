@@ -7,6 +7,7 @@ import {
   ApplicationIntegrations,
   ApplicationTechnology,
   AppEnvironments,
+  TechnologyVersion,
 } from '../types/ResponseTypes';
 
 interface FetchDataParams {
@@ -16,6 +17,7 @@ interface FetchDataParams {
 const useFetchData = ({ context }: FetchDataParams = {}) => {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
+  const [techVersions, setTechVersions] = useState<TechnologyVersion[]>([]);
   const [applicationTechnologies, setApplicationTechnologies] = useState<ApplicationTechnology[]>(
     [],
   );
@@ -27,6 +29,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
 
   const isPCF = !!context;
   const hasFetchedData = useRef(false);
+  const API_URL = process.env.REACT_APP_NOT_SECRET_CODE;
 
   const fetchWithAuth = async (url: string, token: string) => {
     return axios.get(url, {
@@ -40,7 +43,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
     });
   };
 
-  const fetchDataWithAuth = async () => {
+  const fetchDataWithToken = async () => {
     try {
       // Obtain the auth token from localhost:3001/token
       const tokenResponse = await axios.post('http://localhost:3001/token');
@@ -48,16 +51,12 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
 
       // Define the API URLs
       const apiUrls = {
-        technologies:
-          'https://orga796efbc.api.crm3.dynamics.com/api/data/v9.2/cr57a_technologieses',
-        applications:
-          'https://orga796efbc.api.crm3.dynamics.com/api/data/v9.2/cr57a_appscatalogues',
-        appTechnologies:
-          'https://orga796efbc.api.crm3.dynamics.com/api/data/v9.2/cr57a_applicationtechnologieses',
-        appIntegrations:
-          'https://orga796efbc.api.crm3.dynamics.com/api/data/v9.2/cr57a_appintegrationses',
-        appHostingServers:
-          'https://orga796efbc.api.crm3.dynamics.com/api/data/v9.2/cr57a_appenvironmentses',
+        technologies: `${API_URL}api/data/v9.2/cr57a_technologieses`,
+        applications: `${API_URL}api/data/v9.2/cr57a_appscatalogues`,
+        appTechnologies: `${API_URL}api/data/v9.2/cr57a_applicationtechnologieses`,
+        appIntegrations: `${API_URL}api/data/v9.2/cr57a_appintegrationses`,
+        appHostingServers: `${API_URL}api/data/v9.2/cr57a_appenvironmentses`,
+        technologiesVersion: `${API_URL}api/data/v9.2/imb_technologyversions`,
       };
 
       // Fetch all data concurrently with the auth token
@@ -67,19 +66,22 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
         appTechResponse,
         appIntegrationsResponse,
         appHostingServerResponse,
+        technologiesVersionResponse,
       ] = await Promise.all([
         fetchWithAuth(apiUrls.technologies, authToken),
         fetchWithAuth(apiUrls.applications, authToken),
         fetchWithAuth(apiUrls.appTechnologies, authToken),
         fetchWithAuth(apiUrls.appIntegrations, authToken),
         fetchWithAuth(apiUrls.appHostingServers, authToken),
+        fetchWithAuth(apiUrls.technologiesVersion, authToken),
       ]);
 
-      setTechnologies(techResponse.data.value);
       setApplications(appResponse.data.value);
+      setTechnologies(techResponse.data.value);
       setApplicationTechnologies(appTechResponse.data.value);
       setApplicationIntegrations(appIntegrationsResponse.data.value);
       setApplicationEnvironments(appHostingServerResponse.data.value);
+      setTechVersions(technologiesVersionResponse.data.value);
     } catch (error) {
       console.error('Error fetching authenticated data:', error);
     }
@@ -89,14 +91,12 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
     if (isPCF && context) {
       console.log('Using webAPI retrieval');
 
-      const appFetch = await context.webAPI.retrieveMultipleRecords(
-        'cr57a_appscatalogue',
-        '?$select=cr57a_description,cr57a_businessarea,cr57a_businesssme,cr57a_appshortcode,cr57a_appscatalogueid',
-      );
+      const appFetch = await context.webAPI.retrieveMultipleRecords('cr57a_appscatalogue', '');
 
-      const techFetch = await context.webAPI.retrieveMultipleRecords(
-        'cr57a_technologies',
-        '?$select=cr57a_technologyname,cr57a_eoldate,cr57a_technologiesid',
+      const techFetch = await context.webAPI.retrieveMultipleRecords('cr57a_technologies', '');
+      const techVersion = await context.webAPI.retrieveMultipleRecords(
+        'imb_technologyversions',
+        '',
       );
       const appTechFetch = await context.webAPI.retrieveMultipleRecords(
         'cr57a_applicationtechnologies',
@@ -115,6 +115,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
       setApplicationTechnologies(appTechFetch.entities as ApplicationTechnology[]);
       setApplicationIntegrations(appIntFetch.entities as ApplicationIntegrations[]);
       setApplicationEnvironments(appEnvFetch.entities as AppEnvironments[]);
+      setTechVersions(techVersion.entities as TechnologyVersion[]);
     }
   };
 
@@ -130,7 +131,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
       } catch (error) {
         console.error('Error fetching data with Context.WebAPI:', error);
         console.log('Using fallback using local development server');
-        await fetchDataWithAuth();
+        await fetchDataWithToken();
       }
       setLoading(false);
       hasFetchedData.current = true;
@@ -145,6 +146,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
     applicationTechnologies,
     applicationIntegrations,
     applicationEnvironments,
+    techVersions,
     loading,
   };
 };

@@ -16,6 +16,7 @@ import {
   applyLabelStyles,
 } from '../../services/NodesLinkAppearance';
 import { LoadingScreen } from '../loading/loading';
+import { detectClusters } from '../../utils/ClusterDetection';
 
 const NetworkGraph: React.FC<{
   view: string;
@@ -40,6 +41,7 @@ const NetworkGraph: React.FC<{
     applicationTechnologies,
     applicationIntegrations,
     applicationEnvironments,
+    techVersions,
     loading,
   } = useFetchData({ context });
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -51,6 +53,7 @@ const NetworkGraph: React.FC<{
   useEffect(() => {
     if (
       !technologies.length ||
+      !techVersions ||
       !applications.length ||
       !applicationTechnologies.length ||
       !applicationIntegrations.length
@@ -62,6 +65,7 @@ const NetworkGraph: React.FC<{
       processNodesAndLinks(
         applications,
         technologies,
+        techVersions,
         applicationTechnologies,
         applicationIntegrations,
         showAppIntegrations,
@@ -79,16 +83,16 @@ const NetworkGraph: React.FC<{
     const linkedNodeIds = new Set(links.flatMap(link => [link.source, link.target]));
 
     // Filter nodes based on the current view and hideUnlinkedNodes flag
-    const nodes = allNodes.filter(node => {
-      if (showIsolatedNodes || showAppEnvironments) {
-        return linkedNodeIds.has(node.id);
-        // Hide all unlinked nodes in any view when hideUnlinkedNodes is true
-      } else {
-        return node.type !== 'technology' || linkedNodeIds.has(node.id);
-        // In other views:
-        // - Show all nodes (even unlinked)
-      }
-    });
+    const nodes = detectClusters(
+      allNodes.filter(node => {
+        if (showIsolatedNodes || showAppEnvironments) {
+          return linkedNodeIds.has(node.id);
+        } else {
+          return node.type !== 'technology' || linkedNodeIds.has(node.id);
+        }
+      }),
+      links,
+    );
 
     /**
      * The rest of the section deals with the creation of the Graph from
