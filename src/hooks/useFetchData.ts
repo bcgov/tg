@@ -29,7 +29,6 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
 
   const isPCF = !!context;
   const hasFetchedData = useRef(false);
-  const API_URL = process.env.REACT_APP_NOT_SECRET_CODE;
 
   const fetchWithAuth = async (url: string, token: string) => {
     return axios.get(url, {
@@ -48,6 +47,7 @@ const useFetchData = ({ context }: FetchDataParams = {}) => {
       // Obtain the auth token from localhost:3001/token
       const tokenResponse = await axios.post('http://localhost:3001/token');
       const authToken = tokenResponse.data.token;
+      const API_URL = 'https://moti-imb-dev.crm3.dynamics.com/';
 
       // Define the API URLs
       const apiUrls = {

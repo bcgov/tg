@@ -16,7 +16,6 @@ import {
   applyLabelStyles,
 } from '../../services/NodesLinkAppearance';
 import { LoadingScreen } from '../loading/loading';
-import { detectClusters } from '../../utils/ClusterDetection';
 
 const NetworkGraph: React.FC<{
   view: string;
@@ -83,16 +82,13 @@ const NetworkGraph: React.FC<{
     const linkedNodeIds = new Set(links.flatMap(link => [link.source, link.target]));
 
     // Filter nodes based on the current view and hideUnlinkedNodes flag
-    const nodes = detectClusters(
-      allNodes.filter(node => {
-        if (showIsolatedNodes || showAppEnvironments) {
-          return linkedNodeIds.has(node.id);
-        } else {
-          return node.type !== 'technology' || linkedNodeIds.has(node.id);
-        }
-      }),
-      links,
-    );
+    const nodes = allNodes.filter(node => {
+      if (showIsolatedNodes || showAppEnvironments) {
+        return linkedNodeIds.has(node.id);
+      } else {
+        return node.type !== 'technology' || linkedNodeIds.has(node.id);
+      }
+    });
 
     /**
      * The rest of the section deals with the creation of the Graph from
