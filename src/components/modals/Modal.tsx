@@ -29,53 +29,53 @@ const Modal: React.FC<{ onClose: () => void; node: Node }> = ({ onClose, node })
               <IoInformationCircleSharp className="tg-mr-2" />
               General Info
             </h3>
-            <div className="tg-text-gray-700 dark:tg-text-gray-300 tg-space-y-1">
-              <p>
+            <div className="tg-space-y-1">
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
                 <strong>ID:</strong> {node.id}
               </p>
-              <p>
+              <p className="tg-text-gray-700 dark:tg-text-gray-300">
                 <strong>Type:</strong> {node.type}
               </p>
               {node.type === 'technology' ? (
-                <p>
+                <p className="tg-text-gray-700 dark:tg-text-gray-300">
                   <strong>EOL Date:</strong> {node.eolDate ? node.eolDate.toDateString() : 'N/A'}
                 </p>
               ) : (
                 <>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Product Owner:</strong> {node.productOwner || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Risk Level:</strong> {node.riskLevel || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Name: </strong> {node.appname || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Business Area: </strong> {node.businessarea || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Business SME: </strong> {node.businesssme || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Status: </strong> {node.applicationstatus ? 'Active' : 'Inactive'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Hosting Platform: </strong> {node.hostingplatform || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Identity Integrations: </strong> {node.identityintegrations || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Critical System: </strong> {node.criticalsystem ? 'Yes' : 'No'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>DEV URL: </strong> {node.devurl || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>PROD URL: </strong> {node.produrl || 'N/A'}
                   </p>
-                  <p>
+                  <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Description: </strong> {node.description || 'N/A'}
                   </p>
                 </>

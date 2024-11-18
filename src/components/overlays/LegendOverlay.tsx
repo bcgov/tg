@@ -24,11 +24,11 @@ const LegendOverlay: React.FC = () => {
           </div>
         </div>
         <div className="tg-flex tg-items-center tg-space-x-2">
-          <div className="tg-w-4 tg-h-4 tg-bg-node-server-light dark:tg-bg-node-server-dark"></div>
+          <div className="tg-w-4 tg-h-4 tg-bg-node-db-light dark:tg-bg-node-db-dark"></div>
           <span>Database Server</span>
         </div>
         <div className="tg-flex tg-items-center tg-space-x-2">
-          <div className="tg-w-4 tg-h-4 tg-bg-node-db-light dark:tg-bg-node-db-dark"></div>
+          <div className="tg-w-4 tg-h-4 tg-bg-node-server-light dark:tg-bg-node-server-dark"></div>
           <span>Server Appliance</span>
         </div>
       </div>
