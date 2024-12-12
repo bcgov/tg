@@ -36,11 +36,7 @@ const Modal: React.FC<{ onClose: () => void; node: Node }> = ({ onClose, node })
               <p className="tg-text-gray-700 dark:tg-text-gray-300">
                 <strong>Type:</strong> {node.type}
               </p>
-              {node.type === 'technology' ? (
-                <p className="tg-text-gray-700 dark:tg-text-gray-300">
-                  <strong>EOL Date:</strong> {node.eolDate ? node.eolDate.toDateString() : 'N/A'}
-                </p>
-              ) : (
+              {node.type === 'application' ? (
                 <>
                   <p className="tg-text-gray-700 dark:tg-text-gray-300">
                     <strong>Product Owner:</strong> {node.productOwner || 'N/A'}
@@ -79,6 +75,10 @@ const Modal: React.FC<{ onClose: () => void; node: Node }> = ({ onClose, node })
                     <strong>Description: </strong> {node.description || 'N/A'}
                   </p>
                 </>
+              ) : (
+                <p className="tg-text-gray-700 dark:tg-text-gray-300">
+                  <strong>EOL Date:</strong> {node.eolDate ? node.eolDate.toDateString() : 'N/A'}
+                </p>
               )}
             </div>
           </section>
