@@ -56,19 +56,7 @@ export const processNodesAndLinks = (
     };
   });
 
-  //   // Create nodes for each version of the technology
-  //   techVersions
-  //     .filter(version => version._imb_technology_value === tech.cr57a_technologiesid)
-  //     .forEach(version => {
-  //       const versionedId = `${tech.cr57a_technologyname} ${version.imb_version}`;
-  //       nodesMap[versionedId] = {
-  //         id: versionedId,
-  //         type: 'technology',
-  //         eolDate: version.imb_eoldate ? new Date(version.imb_eoldate) : null,
-  //       };
-  //     });
-  // });
-
+  // Create nodes for each version of the technology
   techVersions.forEach(version => {
     const technology = technologies.find(
       tech => tech.cr57a_technologiesid === version._imb_technology_value,
@@ -102,9 +90,11 @@ export const processNodesAndLinks = (
               tech => tech.cr57a_technologiesid === targetVersion._imb_technology_value,
             )?.cr57a_technologyname || '',
           )} ${targetVersion.imb_version}`
-        : '';
+        : String(
+            technologies.find(tech => tech.cr57a_technologiesid === appTech._cr57a_technology_value)
+              ?.cr57a_technologyname || '',
+          );
 
-      // Only return links where both `source` and `target` are non-empty strings
       return source && target ? ({ source, target } as Link) : null;
     })
     .filter((link): link is Link => link !== null);
