@@ -5,7 +5,7 @@ import SettingsOverlay from '../components/overlays/SettingsOverlay';
 import './NetworkContainer.css';
 import LegendOverlay from '../components/overlays/LegendOverlay';
 import FloatingMenu from '../components/menu/FloatingMenuBar';
-import { ViewMode } from '../utils/const';
+import { DEGREE_SEP, ViewMode } from '../utils/const';
 import * as io5 from 'react-icons/io5';
 import { IInputs } from '../generated/ManifestTypes';
 
@@ -19,7 +19,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
   const [view, setView] = useState(ViewMode.Default); // Default view mode
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState(searchQuery);
-  const [degree] = useState(2);
+  const [degree] = useState(DEGREE_SEP);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState(false);
 
   const handleViewChange = (newView: ViewMode, event: React.MouseEvent) => {
