@@ -24,6 +24,7 @@ const NetworkGraph: React.FC<{
   showIntegrationLinks: boolean;
   showAppEnvironments: boolean;
   showIsolatedNodes: boolean;
+  showDecommissionedApps: boolean;
   context?: ComponentFramework.Context<IInputs>;
 }> = ({
   view,
@@ -32,6 +33,7 @@ const NetworkGraph: React.FC<{
   showIntegrationLinks: showAppIntegrations,
   showAppEnvironments,
   showIsolatedNodes,
+  showDecommissionedApps,
   context,
 }) => {
   const {
@@ -72,7 +74,7 @@ const NetworkGraph: React.FC<{
         applicationEnvironments,
       );
 
-    const links = showAppEnvironments
+    let links = showAppEnvironments
       ? appEnvironmentLinks
       : showAppIntegrations
         ? [...integrationLinks, ...commonComponentLinks]
@@ -82,13 +84,25 @@ const NetworkGraph: React.FC<{
     const linkedNodeIds = new Set(links.flatMap(link => [link.source, link.target]));
 
     // Filter nodes based on the current view and hideUnlinkedNodes flag
-    const nodes = allNodes.filter(node => {
+    let nodes = allNodes.filter(node => {
       if (showIsolatedNodes || showAppEnvironments) {
         return linkedNodeIds.has(node.id);
       } else {
         return node.type !== 'technology' || linkedNodeIds.has(node.id);
       }
     });
+
+    // Initially hide decommissioned applications
+    if (!showDecommissionedApps) {
+      nodes = nodes.filter(node => node.type !== 'application' || node.applicationstatus);
+    }
+
+    const activeNodeIds = new Set(nodes.map(node => node.id));
+
+    // Filter links to ensure they only connect active nodes
+    links = links.filter(
+      link => activeNodeIds.has(link.source as string) && activeNodeIds.has(link.target as string),
+    );
 
     /**
      * The rest of the section deals with the creation of the Graph from
@@ -247,6 +261,7 @@ const NetworkGraph: React.FC<{
     showAppIntegrations,
     showAppEnvironments,
     showIsolatedNodes,
+    showDecommissionedApps,
     view,
     searchQuery,
     degree,

@@ -5,12 +5,16 @@ interface SettingsOverlayProps {
   onClose: () => void;
   showIsolatedNode: boolean;
   onHandleIsolatedNodes: () => void;
+  onHandleDecommissionedApps: () => void;
+  showDecommissionedApps: boolean;
 }
 
 const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
   onClose,
   showIsolatedNode,
   onHandleIsolatedNodes,
+  onHandleDecommissionedApps,
+  showDecommissionedApps,
 }) => {
   const [dark, setDark] = React.useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -58,6 +62,19 @@ const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
             className="tg-w-5 tg-h-5 tg-text-blue-600 tg-rounded-md tg-focus:ring-2 tg-focus:ring-blue-400 dark:tg-bg-gray-600"
             checked={showIsolatedNode}
             onChange={onHandleIsolatedNodes}
+          />
+        </div>
+
+        <div className="tg-flex tg-items-center tg-justify-between tg-mb-4">
+          <label htmlFor="isolatedNodesToggle" className="tg-text-gray-700 dark:tg-text-gray-300">
+            Show Decommissioned Apps
+          </label>
+          <input
+            id="decommissionedAppsToggle"
+            type="checkbox"
+            className="tg-w-5 tg-h-5 tg-text-blue-600 tg-rounded-md tg-focus:ring-2 tg-focus:ring-blue-400 dark:tg-bg-gray-600"
+            checked={showDecommissionedApps}
+            onChange={onHandleDecommissionedApps}
           />
         </div>
 

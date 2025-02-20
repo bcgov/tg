@@ -21,6 +21,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
   const [debouncedQuery, setDebouncedQuery] = useState(searchQuery);
   const [degree] = useState(DEGREE_SEP);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState(false);
+  const [showDecommissionedApps, setShowDecommissionedApps] = useState(false);
 
   const handleViewChange = (newView: ViewMode, event: React.MouseEvent) => {
     event.preventDefault();
@@ -77,6 +78,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
         showIntegrationLinks={view === ViewMode.Integrations}
         showAppEnvironments={view === ViewMode.Environments}
         showIsolatedNodes={showIsolatedNodes}
+        showDecommissionedApps={showDecommissionedApps}
         context={context}
       />
       <LegendOverlay />
@@ -111,6 +113,8 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
           onClose={() => setSettingsVisible(false)}
           onHandleIsolatedNodes={handleShowIsolatedNodes}
           showIsolatedNode={showIsolatedNodes}
+          onHandleDecommissionedApps={() => setShowDecommissionedApps(!showDecommissionedApps)}
+          showDecommissionedApps={showDecommissionedApps}
         />
       )}
       {optionsVisible && (
