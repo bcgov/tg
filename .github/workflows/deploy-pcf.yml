@@ -55,7 +55,7 @@ jobs:
       # Build Tailwind CSS
       - name: Build Tailwind CSS
         run: |
-          npm install -g tailwindcss
+          npm install -g tailwindcss@3.4.1
           npm link tailwindcss
           npx tailwindcss -o ./src/generated/style.css --minify
 
