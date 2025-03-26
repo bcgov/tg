@@ -137,12 +137,24 @@ const config: Config = {
             dark: '#47A785',
           },
           db: {
-            light: '#34495e',
-            dark: '#34495e',
+            light: '#800000',
+            dark: '#700303',
           },
           server: {
             light: '#9b59b6',
             dark: '#9b59b6',
+          },
+          openshift: {
+            light: '#008080',
+            dark: '#037070',
+          },
+          storage: {
+            light: '#808080',
+            dark: '#707070',
+          },
+          commoncomponent: {
+            light: '#964b00',
+            dark: '#834303',
           },
         },
       },

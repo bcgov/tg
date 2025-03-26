@@ -81,7 +81,7 @@ const GraphContainer: React.FC<GraphContainerProps> = ({ context }) => {
         showDecommissionedApps={showDecommissionedApps}
         context={context}
       />
-      <LegendOverlay />
+      <LegendOverlay activeViewMode={view} />
       <div className="tg-relative tg-bg-gray-50 dark:tg-bg-slate-900 tg-w-screen tg-h-screen tg-pattern">
         <nav className="tg-z-20 tg-flex tg-shrink-0 tg-grow-0 tg-justify-around tg-bg-white/50 tg-shadow-lg tg-backdrop-blur-lg dark:tg-bg-slate-800/50 tg-fixed tg-top-2/4 tg--translate-y-2/4 tg-right-6 tg-min-h-[auto] tg-min-w-[64px] tg-flex-col tg-rounded-lg">
           <a

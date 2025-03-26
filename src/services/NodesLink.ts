@@ -30,6 +30,7 @@ export const processNodesAndLinks = (
   applications.forEach(app => {
     nodesMap[app.cr57a_appshortcode] = {
       id: app.cr57a_appshortcode,
+      paId: app.cr57a_appscatalogueid,
       type: 'application',
       productOwner: app.cr57a_productowner,
       riskLevel: app.cr57a_risklevel ? app.cr57a_risklevel % 10 : null,
@@ -51,6 +52,7 @@ export const processNodesAndLinks = (
   technologies.forEach(tech => {
     nodesMap[tech.cr57a_technologyname] = {
       id: tech.cr57a_technologyname,
+      paId: tech.cr57a_technologiesid,
       type: 'technology',
       eolDate: tech.cr57a_eoldate ? new Date(tech.cr57a_eoldate) : null,
     };
@@ -165,6 +167,7 @@ export const processNodesAndLinks = (
           ]?.split('.')[0];
         if (!nodesMap[dbServerName]) {
           nodesMap[dbServerName] = {
+            paId: hostingInfo._cr57a_databaseserver_value,
             id: dbServerName,
             type: 'database-server',
           };
@@ -184,6 +187,7 @@ export const processNodesAndLinks = (
           ]?.split('.')[0];
         if (!nodesMap[serverApplianceName]) {
           nodesMap[serverApplianceName] = {
+            paId: hostingInfo._cr57a_serverappliance_value,
             id: serverApplianceName,
             type: 'server-appliance',
           };

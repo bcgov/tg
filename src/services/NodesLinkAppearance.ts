@@ -46,11 +46,11 @@ export const applyNodeStyles = (
     .filter(d => d.type === 'common-component')
     .append('rect')
     .attr('class', 'node-rect')
+    .attr('class', 'tg-fill-node-commoncomponent-light dark:tg-fill-node-commoncomponent-dark')
     .attr('width', 20)
     .attr('height', 20)
     .attr('x', -10)
-    .attr('y', -10)
-    .attr('fill', '#f04a55');
+    .attr('y', -10);
 
   nodesSelection
     .filter(d => d.type === 'database-server')
@@ -77,7 +77,7 @@ export const applyNodeStyles = (
     .append('circle')
     .attr('class', 'node-circle')
     .attr('r', 15)
-    .attr('fill', '#e74c3c'); // Custom color for OpenShift
+    .attr('fill', '#008080'); // Custom color for OpenShift
 };
 
 /**

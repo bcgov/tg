@@ -8,7 +8,7 @@
       <LocalizedName description="NetworkGraph" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.37</Version>
+    <Version>1.38</Version>
     <!-- Solution Package Type: Unmanaged(0)/Managed(1)/Both(2)-->
     <Managed>0</Managed>
     <Publisher>

@@ -1,6 +1,7 @@
 // NodeTypes.ts
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
+  paId?: string;
   techId?: string | null;
   type: string;
   x?: number;
